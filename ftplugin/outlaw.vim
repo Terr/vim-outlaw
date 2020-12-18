@@ -199,3 +199,15 @@ fun! OutlawAlignAllNotes()
   endwhile
   call winrestview(l:view)
 endf
+
+fun! OutlawFormat() range
+  let l:org_text_width = &textwidth
+  let l:line = a:firstline
+  if &textwidth == 0
+      let &textwidth = 79 + indent(l:line)
+  else
+      let &textwidth = l:org_text_width + indent(l:line)
+  endif
+  normal! gqgq
+  let &textwidth = l:org_text_width
+endf
